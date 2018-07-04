@@ -1,0 +1,7 @@
+---
+# defaults file for osp-instances
+int_network: int_network
+instance_name: instance1
+deployment: dev
+security_group_name: default
+ext_network: extnet

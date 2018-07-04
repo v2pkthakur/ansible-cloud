@@ -1,0 +1,26 @@
+- name: Create Flavors & Sec Group
+  hosts: jumpbox
+  roles:
+  - osp-network
+  - osp-flavor
+  - osp-security-group
+  tasks:
+  - name: Create FrontEnd Instance
+    include_role:
+      name: osp-instances
+      vars_from: frontend.yaml
+
+  - name: Create App Server Instance 1
+    include_role:
+      name: osp-instances
+      vars_from: app1.yaml
+
+  - name: Create App Server Instance 2
+    include_role:
+      name: osp-instances
+      vars_from: app2.yaml
+
+  - name: Create DB Instance
+    include_role:
+      name: osp-instances
+      vars_from: db.yaml

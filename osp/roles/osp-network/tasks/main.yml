@@ -1,0 +1,66 @@
+---
+
+# Create an External Network
+- name: Create the Network
+  os_network:
+    name: "{{ext_net_name}}"
+    cloud: "{{cloud_name}}"
+    state: present
+    external: true
+
+
+# Create an External Subnet
+- name: Create External Subnet
+  os_subnet: 
+    cloud: "{{cloud_name}}"
+    name: "{{ext_subnet_name}}"
+    state: present
+    network_name: "{{ext_net_name}}"
+    cidr: 10.10.10.0/24
+    dns_nameservers:
+    - 8.8.8.7
+    - 8.8.8.8
+    host_routes:
+    - destination: 0.0.0.0/0
+      nexthop: 10.10.10.0
+    - destination: 192.168.0.0/24
+      nexthop: 192.168.0.0
+    allocation_pool_start: 
+
+# Create a Private Network
+- name: Create Private Network
+  os_network:
+      cloud: ospcloud
+      state: present
+      name: "{{int_net_name}}"
+      external: false
+  register: internal
+
+# Create a Private Subnet
+- name: Create Private Subnet
+  os_subnet:
+    cloud: ospcloud
+    state: present
+    network_name: "{{int_net_name}}"
+    name: "{{int_subnet_name}}"
+    cidr: 20.20.20.0/24
+    dns_nameservers:
+    - 8.8.8.7
+    - 8.8.8.8
+    host_routes:
+    - destination: 0.0.0.0/0
+      nexthop: 192.168.0.0
+    - destination: 192.168.0.0/24
+      nexthop: 192.168.0.0
+
+# Create a Router Connecting Private and Public Networks
+- name: Create a Router
+  os_router:
+    cloud: ospcloud
+    state: present
+    name: "{{router_name}}"
+    network: "{{ext_net_name}}"
+    external_fixed_ips:
+    - subnet: "{{ext_subnet_name}}"
+    interfaces:
+    - "{{int_subnet_name}}"

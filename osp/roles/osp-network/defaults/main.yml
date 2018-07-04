@@ -1,0 +1,9 @@
+---
+# defaults file for osp-network
+ext_net_name: extnet
+ext_subnet_name: subext
+cloud_name: ospcloud
+int_net_name: int_network
+int_subnet_name: int_subnet
+router_name: Router1
+

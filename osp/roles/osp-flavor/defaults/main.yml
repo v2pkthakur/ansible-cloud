@@ -1,0 +1,7 @@
+---
+# defaults file for osp-flavor
+flavor_name: m2.small
+ram: 2048
+vcpu: 1
+disk: 10
+
