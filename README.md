@@ -10,5 +10,5 @@ This Repo is focussed to get ansible playbooks for:
 -> Create Instances.
 
 
-*) Deploy 3-tier application on OpenStack.
+*) Deploy 3-tier application on OpenStack Instances.
 
