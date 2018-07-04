@@ -9,5 +9,6 @@ This Repo is focussed to get ansible playbooks for:
 -> Create Flavor.
 -> Create Instances.
 
+
 *) Deploy 3-tier application on OpenStack.
 
